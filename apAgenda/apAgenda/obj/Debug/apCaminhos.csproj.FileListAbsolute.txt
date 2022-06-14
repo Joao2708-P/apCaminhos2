@@ -1,0 +1,11 @@
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\bin\Debug\apCaminhos.exe.config
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\bin\Debug\apCaminhos.exe
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\bin\Debug\apCaminhos.pdb
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.csproj.AssemblyReference.cache
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.csproj.SuggestedBindingRedirects.cache
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.FrmCidades.resources
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.Properties.Resources.resources
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.csproj.GenerateResource.cache
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.csproj.CoreCompileInputs.cache
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.exe
+G:\disciplinas\2022\1o Semestre\EstDad\projetos\apAgenda\apAgenda\obj\Debug\apCaminhos.pdb

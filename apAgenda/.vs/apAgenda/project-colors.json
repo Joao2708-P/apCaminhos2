@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Arquivos Diversos",
+      "ColorIndex": -1
+    },
+    "29bc05aa-41eb-44db-a682-ef6c9e4b2336": {
+      "ProjectGuid": "29bc05aa-41eb-44db-a682-ef6c9e4b2336",
+      "DisplayName": "apCaminhos",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
