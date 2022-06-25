@@ -11,7 +11,6 @@ namespace apCaminhos
 {
     internal class GrafoBacktraking
     {
-        const int tamanhoDistancia = 4;
         const int tamCodigo = 3,
         tamDistancia = 5,
         tamTempo = 4,
@@ -43,13 +42,6 @@ namespace apCaminhos
                 }
             }
 
-            string linha = arquivo.ReadLine();
-            IdCidadeOrigem = linha.Substring(iniCodigoOrigem, tamCodigo);
-            IdCidadeDestino = linha.Substring(iniCodigoDestino, tamCodigo);
-            Distancia = int.Parse(linha.Substring(iniDistancia, tamDistancia));
-            Tempo = int.Parse(linha.Substring(iniTempo, tamTempo));
-            Custo = int.Parse(linha.Substring(iniCusto, tamCusto));
-            return this; // retorna o próprio objeto Contato, com os dados
         }
 
         public char TipoGrafo { get => tipoGrafo; set => tipoGrafo = value; }
