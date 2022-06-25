@@ -381,4 +381,6 @@ class ListaDupla<Dado> : IDados<Dado>
         primeiro = ordenada.primeiro;
         ultimo = ordenada.ultimo;
     }
+
+    
 }

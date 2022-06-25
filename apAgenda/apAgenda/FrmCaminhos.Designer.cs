@@ -488,6 +488,7 @@
             this.cbxOrigem.Name = "cbxOrigem";
             this.cbxOrigem.Size = new System.Drawing.Size(150, 28);
             this.cbxOrigem.TabIndex = 35;
+            this.cbxOrigem.SelectedIndexChanged += new System.EventHandler(this.cbxOrigem_SelectedIndexChanged);
             // 
             // lbKmCaminhoSelecionado
             // 

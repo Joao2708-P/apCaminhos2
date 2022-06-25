@@ -12,6 +12,17 @@ namespace apCaminhos
     internal class GrafoBacktraking
     {
         const int tamanhoDistancia = 4;
+        const int tamCodigo = 3,
+        tamDistancia = 5,
+        tamTempo = 4,
+        tamCusto = 4;
+
+        const int iniCodigoOrigem = 0,
+                  iniCodigoDestino = iniCodigoOrigem + tamCodigo,
+                  iniDistancia = iniCodigoDestino + tamCodigo,
+                  iniTempo = iniDistancia + tamDistancia,
+                  iniCusto = iniTempo + tamTempo;
+
         char tipoGrafo;
         int qtasCidades;
         int[,] matriz;
@@ -25,10 +36,20 @@ namespace apCaminhos
 
             for (int linha = 0; linha < qtasCidades; linha++)
             {
-                string arestas = arqruivo.ReadLine();
                 for (int coluna = 0; coluna < qtasCidades; coluna++)
-                    matriz[linha, coluna] = int.Parse(arestas.Substring(coluna * tamanhoDistancia, tamanhoDistancia));
+                {
+                    string arestas = arqruivo.ReadLine();
+                    matriz[linha, coluna] = int.Parse(arestas.Substring(0,3));
+                }
             }
+
+            string linha = arquivo.ReadLine();
+            IdCidadeOrigem = linha.Substring(iniCodigoOrigem, tamCodigo);
+            IdCidadeDestino = linha.Substring(iniCodigoDestino, tamCodigo);
+            Distancia = int.Parse(linha.Substring(iniDistancia, tamDistancia));
+            Tempo = int.Parse(linha.Substring(iniTempo, tamTempo));
+            Custo = int.Parse(linha.Substring(iniCusto, tamCusto));
+            return this; // retorna o próprio objeto Contato, com os dados
         }
 
         public char TipoGrafo { get => tipoGrafo; set => tipoGrafo = value; }
@@ -53,7 +74,7 @@ namespace apCaminhos
             }
         }
 
-        public PilhaLista<Movimento> BuscarCaminho(int origem, int destino, ListBox lsb, DataGridView dgvGrafo, DataGridView dgvPilha)
+        public PilhaLista<Movimento> BuscarCaminho(int origem, int destino, DataGridView dgvCaminho, DataGridView dgvGrafo)
         {
             int cidadeAtual, saidaAtual;
             bool achouCaminho = false,
@@ -62,7 +83,6 @@ namespace apCaminhos
             // inicia os valores de “passou” pois ainda não foi em nenhuma cidade
             for (int indice = 0; indice < qtasCidades; indice++)
                 passou[indice] = false;
-            lsb.Items.Clear();
             cidadeAtual = origem;
             saidaAtual = 0;
             var pilha = new PilhaLista<Movimento>();
@@ -83,12 +103,10 @@ namespace apCaminhos
                             Movimento movim = new Movimento(cidadeAtual, saidaAtual);
                             pilha.Empilhar(movim);
                             achouCaminho = true;
-                            lsb.Items.Add($"Saiu de {cidadeAtual} para {saidaAtual}");
-                            ExibirUmPasso();
+                           ExibirUmPasso();
                         }
                         else
                         {
-                            lsb.Items.Add($"Saiu de {cidadeAtual} para {saidaAtual}");
                             ExibirUmPasso();
                             Movimento movim = new Movimento(cidadeAtual, saidaAtual);
                             pilha.Empilhar(movim);
@@ -105,7 +123,6 @@ namespace apCaminhos
                         var movim = pilha.Desempilhar();
                         saidaAtual = movim.Destino;
                         cidadeAtual = movim.Origem;
-                        lsb.Items.Add($"Voltando de {saidaAtual} para {cidadeAtual}");
                         ExibirUmPasso();
                         saidaAtual++;
                     }
@@ -122,11 +139,11 @@ namespace apCaminhos
                 }
             }
             return saida;
-
+            
             void ExibirUmPasso()
             {
                 dgvGrafo.CurrentCell = dgvGrafo[saidaAtual, cidadeAtual];
-                Exibir(dgvPilha);
+                Exibir(dgvCaminho);
                 Thread.Sleep(1000);
             }
         }
