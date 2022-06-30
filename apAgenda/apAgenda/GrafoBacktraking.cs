@@ -23,30 +23,36 @@ namespace apCaminhos
                   iniCusto = iniTempo + tamTempo;
 
         char tipoGrafo;
-        int qtasCidades;
-        int[,] matriz;
+        int qtasCidades = 0;
+        int[,,] matriz;
 
-        public GrafoBacktraking(string nomeDeArquivo)
+        public GrafoBacktraking(string nomeDeArquivo, int quantasCidades)
         {
             var arqruivo = new StreamReader(nomeDeArquivo);
-            tipoGrafo = arqruivo.ReadLine()[0]; // vai acessar o primeiro caracter com o tipo do Grafo
-            qtasCidades = int.Parse(arqruivo.ReadLine());
-            matriz = new int[qtasCidades, qtasCidades];
-
-            for (int linha = 0; linha < qtasCidades; linha++)
+            // tipoGrafo = arqruivo.ReadLine()[0]; 
+            // vai acessar o primeiro caracter com o tipo do Grafo
+            qtasCidades = quantasCidades;
+            matriz = new int[qtasCidades, qtasCidades, 3];
+            while(!arqruivo.EndOfStream)
             {
-                for (int coluna = 0; coluna < qtasCidades; coluna++)
-                {
-                    string arestas = arqruivo.ReadLine();
-                    matriz[linha, coluna] = int.Parse(arestas.Substring(0,3));
-                }
+                string arestas = arqruivo.ReadLine();
+                int[] dados = new int[5];
+                dados[0] = int.Parse(arestas.Substring(0, 2));
+                dados[1] = int.Parse(arestas.Substring(3, 2));
+                dados[2] = int.Parse(arestas.Substring(6, 4));
+                dados[3] = int.Parse(arestas.Substring(12, 2));
+                dados[4] = int.Parse(arestas.Substring(16, 3));
+
+                matriz[dados[0], dados[1], 0] = dados[2];
+                matriz[dados[0], dados[1], 1] = dados[3];
+                matriz[dados[0], dados[1], 2] = dados[4];
             }
 
         }
 
         public char TipoGrafo { get => tipoGrafo; set => tipoGrafo = value; }
         public int QuantasCidades { get => qtasCidades; set => qtasCidades = value; }
-        public int[,] Matriz { get => matriz; set => matriz = value; }
+        public int[,,] Matriz { get => matriz; set => matriz = value; }
 
         public void Exibir(DataGridView dvg)
         {
@@ -56,13 +62,14 @@ namespace apCaminhos
                 dvg.Columns[coluna].HeaderText = coluna.ToString();
                 dvg.Rows[coluna].HeaderCell.Value = coluna.ToString();
                 dvg.Columns[coluna].Width = 30;
+                
             }
 
             for (int linha = 0; linha < qtasCidades; linha++)
             {
                 for (int coluna = 0; coluna < qtasCidades; coluna++)
-                    if (matriz[linha, coluna] != 0)
-                        dvg[coluna, linha].Value = matriz[coluna, linha];
+                    if (matriz[linha, coluna, 0] != 0)
+                        dvg[coluna, linha].Value = matriz[coluna, linha, 1];
             }
         }
 
@@ -85,7 +92,7 @@ namespace apCaminhos
                 {
                     while ((saidaAtual < qtasCidades) && !achouCaminho)
                     {
-                        if (matriz[cidadeAtual, saidaAtual] == 0)
+                        if (matriz[cidadeAtual, saidaAtual, 0] == 0)
                             saidaAtual++;
                         else
                             if (passou[saidaAtual])
@@ -95,11 +102,11 @@ namespace apCaminhos
                             Movimento movim = new Movimento(cidadeAtual, saidaAtual);
                             pilha.Empilhar(movim);
                             achouCaminho = true;
-                           ExibirUmPasso();
+                            ExibirUmPasso();
                         }
                         else
                         {
-                            ExibirUmPasso();
+                            //ExibirUmPasso();
                             Movimento movim = new Movimento(cidadeAtual, saidaAtual);
                             pilha.Empilhar(movim);
                             passou[cidadeAtual] = true;
@@ -134,9 +141,10 @@ namespace apCaminhos
             
             void ExibirUmPasso()
             {
-                dgvGrafo.CurrentCell = dgvGrafo[saidaAtual, cidadeAtual];
-                Exibir(dgvCaminho);
-                Thread.Sleep(1000);
+                 dgvGrafo.CurrentCell.Value = matriz[cidadeAtual,saidaAtual, 0];
+                 //MessageBox.Show(saidaAtual + "-" + cidadeAtual);
+                 Exibir(dgvCaminho);
+                 Thread.Sleep(10);
             }
         }
     }

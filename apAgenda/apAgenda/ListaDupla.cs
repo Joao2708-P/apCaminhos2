@@ -58,8 +58,7 @@ class ListaDupla<Dado> : IDados<Dado>
     {
         if (nomeArquivo != null)
         {
-            var arquivo = new StreamReader(nomeArquivo);
-
+            var arquivo = new StreamReader(nomeArquivo); 
             while (!arquivo.EndOfStream)
             {
                 var dado = new Dado().LerRegistro(arquivo);

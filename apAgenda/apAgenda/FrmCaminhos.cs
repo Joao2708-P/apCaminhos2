@@ -40,8 +40,9 @@ namespace apCaminhos
 
              if(dlgAbrir.ShowDialog() == DialogResult.OK)
              {
-                cidadeListaDupla=new ListaDupla<Cidade>();
+                cidadeListaDupla = new ListaDupla<Cidade>();
                 cidadeListaDupla.LerDados(dlgAbrir.FileName);
+
              }
 
             if (dlgAbrir2.ShowDialog() == DialogResult.OK)
@@ -49,17 +50,19 @@ namespace apCaminhos
                 //Leitura dos arquivos das cidades
                 ligacaoListaDupla = new ListaDupla<Ligacao>();
                 ligacaoListaDupla.LerDados(dlgAbrir2.FileName);
-                oGrafo = new GrafoBacktraking(dlgAbrir2.FileName);
+                oGrafo = new GrafoBacktraking(dlgAbrir2.FileName, cidadeListaDupla.Tamanho);
             }
 
             cidadeListaDupla.PosicionarNoPrimeiro();
+            ligacaoListaDupla.PosicionarNoPrimeiro();
 
-            while (cidadeListaDupla.DadoAtual() != null)
+            while (cidadeListaDupla.DadoAtual()!= null)
             {
                 cbxOrigem.Items.Add(cidadeListaDupla.DadoAtual().Nome);
                 cbxDestino.Items.Add(cidadeListaDupla.DadoAtual().Nome);
                 cidadeListaDupla.AvancarPosicao();
             }
+
 
         }
 
@@ -112,25 +115,26 @@ namespace apCaminhos
         {
             int origem = cbxOrigem.SelectedIndex;
             int destino = cbxDestino.SelectedIndex;
+
+            MessageBox.Show(origem.ToString());
             var pilhaCaminho = oGrafo.BuscarCaminho(origem, destino, dgvMelhorCaminho, dgvCaminhosEncontrados);
 
 
             if (pilhaCaminho.EstaVazia)
-                MessageBox.Show("Não achou caminho");
+                  MessageBox.Show("Não achou caminho");
             else
             {
                 MessageBox.Show("Achou caminho");
                 var caminho = pilhaCaminho.DadosDaPilha();
-                dgvCaminhosEncontrados.ColumnCount = caminho.Count + 1;
-                dgvCaminhosEncontrados.RowCount = 3;
-                dgvCaminhosEncontrados[0, 0].Value = "Origem";
-                dgvCaminhosEncontrados[0, 1].Value = "Destino";
-                int indice = 1;
+                dgvMelhorCaminho.ColumnCount = 1;
+                dgvMelhorCaminho.RowCount = caminho.Count + 1;
+                int indice = 0;
                 foreach (var c in caminho)
                 {
-                    dgvCaminhosEncontrados[indice, 0].Value = c.Origem;
-                    dgvCaminhosEncontrados[indice, 1].Value = c.Destino;
+                    //percorrer combobox para encontrar o nome com base no indice
+                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Origem];
                     indice++;
+                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Destino];
                 }
             }
         }
@@ -138,6 +142,15 @@ namespace apCaminhos
         private void cbxOrigem_SelectedIndexChanged(object sender, EventArgs e)
         {
             cidadeListaDupla.Equals(cbxOrigem.SelectedIndex);
+        }
+
+        private void inicio_Click(object sender, EventArgs e)
+        {
+            ligacaoListaDupla.PosicionarNoPrimeiro();
+            cidadeListaDupla.PosicionarNoPrimeiro();
+
+            cbxOrigem.Text = cidadeListaDupla.DadoAtual().Nome;
+            cbxDestino.Text = cidadeListaDupla.DadoAtual().Nome;
         }
     }
 }

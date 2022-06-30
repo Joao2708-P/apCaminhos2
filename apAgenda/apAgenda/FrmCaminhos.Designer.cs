@@ -35,10 +35,10 @@
             this.slMensagem = new System.Windows.Forms.ToolStripStatusLabel();
             this.imlBotoes = new System.Windows.Forms.ImageList(this.components);
             this.Caminhos = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.inicio = new System.Windows.Forms.ToolStripButton();
+            this.Anterior = new System.Windows.Forms.ToolStripButton();
+            this.Proximo = new System.Windows.Forms.ToolStripButton();
+            this.Ultimo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnProcurar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,6 +79,7 @@
             this.cbxOrigem = new System.Windows.Forms.ComboBox();
             this.lbKmCaminhoSelecionado = new System.Windows.Forms.Label();
             this.dlgAbrir2 = new System.Windows.Forms.OpenFileDialog();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             this.Caminhos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -127,10 +128,10 @@
             this.Caminhos.BackColor = System.Drawing.Color.Silver;
             this.Caminhos.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Caminhos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
+            this.inicio,
+            this.Anterior,
+            this.Proximo,
+            this.Ultimo,
             this.toolStripSeparator1,
             this.btnProcurar,
             this.toolStripSeparator3,
@@ -148,41 +149,42 @@
             this.Caminhos.TabIndex = 3;
             this.Caminhos.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // inicio
             // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(40, 39);
-            this.toolStripButton1.Text = "Início";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.inicio.Image = ((System.Drawing.Image)(resources.GetObject("inicio.Image")));
+            this.inicio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.inicio.Name = "inicio";
+            this.inicio.Size = new System.Drawing.Size(40, 39);
+            this.inicio.Text = "Início";
+            this.inicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.inicio.Click += new System.EventHandler(this.inicio_Click);
             // 
-            // toolStripButton2
+            // Anterior
             // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(54, 39);
-            this.toolStripButton2.Text = "Anterior";
-            this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Anterior.Image = ((System.Drawing.Image)(resources.GetObject("Anterior.Image")));
+            this.Anterior.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Anterior.Name = "Anterior";
+            this.Anterior.Size = new System.Drawing.Size(54, 39);
+            this.Anterior.Text = "Anterior";
+            this.Anterior.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripButton3
+            // Proximo
             // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(56, 39);
-            this.toolStripButton3.Text = "Próximo";
-            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Proximo.Image = ((System.Drawing.Image)(resources.GetObject("Proximo.Image")));
+            this.Proximo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Proximo.Name = "Proximo";
+            this.Proximo.Size = new System.Drawing.Size(56, 39);
+            this.Proximo.Text = "Próximo";
+            this.Proximo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripButton4
+            // Ultimo
             // 
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(47, 39);
-            this.toolStripButton4.Text = "Último";
-            this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Ultimo.Image = ((System.Drawing.Image)(resources.GetObject("Ultimo.Image")));
+            this.Ultimo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Ultimo.Name = "Ultimo";
+            this.Ultimo.Size = new System.Drawing.Size(47, 39);
+            this.Ultimo.Text = "Último";
+            this.Ultimo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator1
             // 
@@ -317,7 +319,8 @@
             this.Column7,
             this.Column8,
             this.Column9,
-            this.Column10});
+            this.Column10,
+            this.Column11});
             this.dgvCaminhosEncontrados.Location = new System.Drawing.Point(10, 599);
             this.dgvCaminhosEncontrados.Name = "dgvCaminhosEncontrados";
             this.dgvCaminhosEncontrados.Size = new System.Drawing.Size(1323, 121);
@@ -482,8 +485,6 @@
             // cbxOrigem
             // 
             this.cbxOrigem.FormattingEnabled = true;
-            this.cbxOrigem.Items.AddRange(new object[] {
-            "123456789012345"});
             this.cbxOrigem.Location = new System.Drawing.Point(10, 76);
             this.cbxOrigem.Name = "cbxOrigem";
             this.cbxOrigem.Size = new System.Drawing.Size(150, 28);
@@ -503,6 +504,11 @@
             // dlgAbrir2
             // 
             this.dlgAbrir2.FileName = "openFileDialog1";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "10a";
+            this.Column11.Name = "Column11";
             // 
             // FrmCaminhos
             // 
@@ -552,10 +558,10 @@
     private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ImageList imlBotoes;
         private System.Windows.Forms.ToolStrip Caminhos;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton inicio;
+        private System.Windows.Forms.ToolStripButton Anterior;
+        private System.Windows.Forms.ToolStripButton Proximo;
+        private System.Windows.Forms.ToolStripButton Ultimo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnProcurar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -597,6 +603,7 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.OpenFileDialog dlgAbrir2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
     }
 }
 
