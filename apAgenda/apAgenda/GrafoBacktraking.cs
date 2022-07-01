@@ -61,7 +61,7 @@ namespace apCaminhos
             {
                 dvg.Columns[coluna].HeaderText = coluna.ToString();
                 dvg.Rows[coluna].HeaderCell.Value = coluna.ToString();
-                dvg.Columns[coluna].Width = 30;
+                dvg.Columns[coluna].Width = 30;                                                                           
                 
             }
 
@@ -69,7 +69,7 @@ namespace apCaminhos
             {
                 for (int coluna = 0; coluna < qtasCidades; coluna++)
                     if (matriz[linha, coluna, 0] != 0)
-                        dvg[coluna, linha].Value = matriz[coluna, linha, 1];
+                        dvg[coluna, linha].Value = matriz[coluna, linha, 0];
             }
         }
 
@@ -82,6 +82,7 @@ namespace apCaminhos
             // inicia os valores de “passou” pois ainda não foi em nenhuma cidade
             for (int indice = 0; indice < qtasCidades; indice++)
                 passou[indice] = false;
+            int linha = 0;
             cidadeAtual = origem;
             saidaAtual = 0;
             var pilha = new PilhaLista<Movimento>();
@@ -134,17 +135,24 @@ namespace apCaminhos
                 while (!pilha.EstaVazia)
                 {
                     Movimento movim = pilha.Desempilhar();
+                    
                     saida.Empilhar(movim);
                 }
             }
+ 
             return saida;
             
             void ExibirUmPasso()
             {
-                 dgvGrafo.CurrentCell.Value = matriz[cidadeAtual,saidaAtual, 0];
-                 //MessageBox.Show(saidaAtual + "-" + cidadeAtual);
-                 Exibir(dgvCaminho);
-                 Thread.Sleep(10);
+                dgvGrafo.RowCount = linha + 1;
+
+                dgvGrafo.Rows[linha++].Cells[0].Value = matriz[cidadeAtual, saidaAtual, 0];
+
+                dgvGrafo.RowCount = saidaAtual + 1;
+                //Exibir(dgvGrafo);
+                //MessageBox.Show(saidaAtual + "-" + cidadeAtual);
+
+                Thread.Sleep(10);
             }
         }
     }

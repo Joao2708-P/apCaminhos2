@@ -66,6 +66,15 @@ namespace apCaminhos
 
         }
 
+        void Atual()
+        {
+            cidadeListaDupla.PosicionarNoPrimeiro();
+            if(cidadeListaDupla.DadoAtual() != null)
+            {
+                ligacaoListaDupla.DadoAtual();
+            }
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             //Cidade cidade = cidadeListaDupla.DadoAtual();
@@ -116,9 +125,7 @@ namespace apCaminhos
             int origem = cbxOrigem.SelectedIndex;
             int destino = cbxDestino.SelectedIndex;
 
-            MessageBox.Show(origem.ToString());
             var pilhaCaminho = oGrafo.BuscarCaminho(origem, destino, dgvMelhorCaminho, dgvCaminhosEncontrados);
-
 
             if (pilhaCaminho.EstaVazia)
                   MessageBox.Show("Não achou caminho");
@@ -132,9 +139,16 @@ namespace apCaminhos
                 foreach (var c in caminho)
                 {
                     //percorrer combobox para encontrar o nome com base no indice
-                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Origem];
+                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Origem].Nome;
                     indice++;
-                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Destino];
+                    dgvMelhorCaminho[0, indice].Value = cidadeListaDupla[c.Destino].Nome;
+
+                      foreach(Movimento d in caminho)
+                      {
+                       
+                          dgvCaminhosEncontrados[0, indice].Value = cidadeListaDupla[d.Origem].Nome;
+                          indice++;
+                      }
                 }
             }
         }
@@ -151,6 +165,11 @@ namespace apCaminhos
 
             cbxOrigem.Text = cidadeListaDupla.DadoAtual().Nome;
             cbxDestino.Text = cidadeListaDupla.DadoAtual().Nome;
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
